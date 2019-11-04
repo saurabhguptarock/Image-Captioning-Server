@@ -1,1 +1,1 @@
-web: gunicorn deploy:app --preload
+web: gunicorn deploy:app --preload --max-requests 10
