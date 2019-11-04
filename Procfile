@@ -1,1 +1,1 @@
-web: gunicorn deploy:app --max-requests 100
+web: gunicorn deploy:app
