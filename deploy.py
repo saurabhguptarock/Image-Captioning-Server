@@ -43,7 +43,8 @@ with open("idx_to_word.txt", "r") as f:
 def predict_caption(model1, photo):
     in_text = "startseq"
     for i in range(80):
-        sequence = [word_to_idx[w] for w in in_text.split() if w in word_to_idx]
+        sequence = [word_to_idx[w]
+                    for w in in_text.split() if w in word_to_idx]
         sequence = pad_sequences([sequence], maxlen=80, padding="post")
         ypred = model1.predict([photo, sequence])
         ypred = ypred.argmax()
@@ -62,6 +63,6 @@ def index():
     with urllib.request.urlopen(request.json["image"]) as url:
         asdw = io.BytesIO(url.read())
     model1 = load_model("./model.h5")
-    return jsonify( 
+    return jsonify(
         captions=predict_caption(model1, encode_image(asdw).reshape((1, 2048)))
     )
